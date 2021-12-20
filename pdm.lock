@@ -1,0 +1,94 @@
+[[package]]
+name = "asynchronousfilereader"
+version = "0.2.1"
+summary = "Simple thread based asynchronous file reader"
+
+[[package]]
+name = "click"
+version = "8.0.3"
+requires_python = ">=3.6"
+summary = "Composable command line interface toolkit"
+dependencies = [
+    "colorama; platform_system == \"Windows\"",
+    "importlib-metadata; python_version < \"3.8\"",
+]
+
+[[package]]
+name = "colorama"
+version = "0.4.4"
+requires_python = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+summary = "Cross-platform colored terminal text."
+
+[[package]]
+name = "haikunator"
+version = "2.1.0"
+summary = "Heroku-like random name generator for python."
+
+[[package]]
+name = "importlib-metadata"
+version = "4.10.0"
+requires_python = ">=3.7"
+summary = "Read metadata from Python packages"
+dependencies = [
+    "typing-extensions>=3.6.4; python_version < \"3.8\"",
+    "zipp>=0.5",
+]
+
+[[package]]
+name = "typer"
+version = "0.4.0"
+requires_python = ">=3.6"
+summary = "Typer, build great CLIs. Easy to code. Based on Python type hints."
+dependencies = [
+    "click<9.0.0,>=7.1.1",
+]
+
+[[package]]
+name = "typing-extensions"
+version = "4.0.1"
+requires_python = ">=3.6"
+summary = "Backported and Experimental Type Hints for Python 3.6+"
+
+[[package]]
+name = "zipp"
+version = "3.6.0"
+requires_python = ">=3.6"
+summary = "Backport of pathlib-compatible object wrapper for zip files"
+
+[metadata]
+lock_version = "3.1"
+content_hash = "sha256:e2e673fd497b31996017619d8b61f25006425140f039f1a35c059fe01d3a2cc9"
+
+[metadata.files]
+"asynchronousfilereader 0.2.1" = [
+    {file = "asynchronousfilereader-0.2.1-py2.py3-none-any.whl", hash = "sha256:cdcf47956cecddfd86c82e5e7bd4147fcd680984156d9a56b0d5a7bcbbb063b1"},
+    {file = "asynchronousfilereader-0.2.1.tar.gz", hash = "sha256:1a48e286a9ed9c3b1771b1cb8705637c090bdf081f90664b11cb3caaa53d5beb"},
+]
+"click 8.0.3" = [
+    {file = "click-8.0.3-py3-none-any.whl", hash = "sha256:353f466495adaeb40b6b5f592f9f91cb22372351c84caeb068132442a4518ef3"},
+    {file = "click-8.0.3.tar.gz", hash = "sha256:410e932b050f5eed773c4cda94de75971c89cdb3155a72a0831139a79e5ecb5b"},
+]
+"colorama 0.4.4" = [
+    {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
+    {file = "colorama-0.4.4.tar.gz", hash = "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b"},
+]
+"haikunator 2.1.0" = [
+    {file = "haikunator-2.1.0-py2.py3-none-any.whl", hash = "sha256:66f68b15345b279f78a5fffd4ab56cfb19a9dbb1f41b7f442472efd4cb83458e"},
+    {file = "haikunator-2.1.0.zip", hash = "sha256:91ee3949a3a613cac037ddde0b16b17062e248376b11491436e49d5ddc75ff9b"},
+]
+"importlib-metadata 4.10.0" = [
+    {file = "importlib_metadata-4.10.0-py3-none-any.whl", hash = "sha256:b7cf7d3fef75f1e4c80a96ca660efbd51473d7e8f39b5ab9210febc7809012a4"},
+    {file = "importlib_metadata-4.10.0.tar.gz", hash = "sha256:92a8b58ce734b2a4494878e0ecf7d79ccd7a128b5fc6014c401e0b61f006f0f6"},
+]
+"typer 0.4.0" = [
+    {file = "typer-0.4.0-py3-none-any.whl", hash = "sha256:d81169725140423d072df464cad1ff25ee154ef381aaf5b8225352ea187ca338"},
+    {file = "typer-0.4.0.tar.gz", hash = "sha256:63c3aeab0549750ffe40da79a1b524f60e08a2cbc3126c520ebf2eeaf507f5dd"},
+]
+"typing-extensions 4.0.1" = [
+    {file = "typing_extensions-4.0.1-py3-none-any.whl", hash = "sha256:7f001e5ac290a0c0401508864c7ec868be4e701886d5b573a9528ed3973d9d3b"},
+    {file = "typing_extensions-4.0.1.tar.gz", hash = "sha256:4ca091dea149f945ec56afb48dae714f21e8692ef22a395223bcd328961b6a0e"},
+]
+"zipp 3.6.0" = [
+    {file = "zipp-3.6.0-py3-none-any.whl", hash = "sha256:9fe5ea21568a0a70e50f273397638d39b03353731e6cbbb3fd8502a33fec40bc"},
+    {file = "zipp-3.6.0.tar.gz", hash = "sha256:71c644c5369f4a6e07636f0aa966270449561fcea2e3d6747b8d23efaa9d7832"},
+]
