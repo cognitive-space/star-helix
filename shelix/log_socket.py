@@ -1,6 +1,10 @@
+import os
 import threading
 
 import websocket
+
+
+SHOW_ERRORS = int(os.environ.get('SHELIX_SHOW_LOGGING_ERRORS', '0'))
 
 
 def on_message(ws, message):
@@ -8,7 +12,8 @@ def on_message(ws, message):
 
 
 def on_error(ws, error):
-    print(error)
+    if SHOW_ERRORS:
+        print(error)
 
 
 def on_close(ws, close_status_code, close_msg):

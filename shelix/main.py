@@ -61,8 +61,9 @@ def send_lines(ws, log_id, content, last_send, force=False):
     return content, last_send
 
 def main(
-        log_id: str,
         command: str,
+        log_id: str = typer.Argument("Log ID", envvar='SHELIX_LOGID'),
+        token: str = typer.Argument("API Token", envvar='SHELIX_TOKEN'),
         ws_url: str = typer.Argument("Server URL", envvar='SHELIX_WS_URL')
     ):
 
@@ -84,6 +85,7 @@ def main(
     last_send = datetime.datetime.utcnow()
     content = ''
 
+    ws_url = f'{ws_url}/?token={token}'
     ws = start_socket(ws_url)
 
     while not reader.eof():
