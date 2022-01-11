@@ -1,7 +1,7 @@
 [project]
-name = "star-helix-cli"
-version = "0.1.0"
-description = ""
+name = "star-helix"
+description = "Logging service client code and cli"
+dynamic = ["version"]
 authors = [
     {name = "Paul Bailey", email = "paul@cognitivespace.com"},
 ]
@@ -16,7 +16,10 @@ requires-python = ">=3.7"
 license = {text = "MIT"}
 
 [project.urls]
-homepage = ""
+homepage = "https://github.com/cognitive-space/star-helix"
+
+[project.scripts]
+shelix = "shelix.main:run_cli"
 
 [tool]
 [tool.pdm]
@@ -24,6 +27,7 @@ homepage = ""
 [tool.pdm.scripts]
 _.env_file = ".env"
 noisy = "./shelix_cli/main.py \"python3 noisy.py\""
+publish = "pdm publish --username pizzapanther"
 
 
 [build-system]

@@ -14,7 +14,7 @@ import typer
 
 import asynchronousfilereader as asfr
 
-from shelix_cli.log_socket import start_socket
+from shelix.log_socket import start_socket
 
 os.environ.setdefault('SHELIX_WS_URL', 'wss://star-helix.herokuapp.com/')
 
@@ -103,5 +103,9 @@ def main(
     ws.close()
 
 
-if __name__ == "__main__":
+def run_cli():
     typer.run(main)
+
+
+if __name__ == "__main__":
+    run_cli()
