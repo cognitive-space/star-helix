@@ -70,11 +70,16 @@ def main(
         ws_url: str = typer.Argument("Server URL", envvar='SHELIX_WS_URL'),
         bypass: bool = typer.Option(False, help="Bypass Reporting to the server", envvar="SHELIX_BYPASS"),
         prefix: str = typer.Option('', help="Prefix log output", envvar="SHELIX_PREFIX"),
+        prefix_disable_random: bool = typer.Option(False, envvar="SHELIX_PREFIX_DISABLE_RANDOM"),
     ):
 
     if prefix:
-        haikunator = Haikunator()
-        prefix += '-' + '-'.join(haikunator.haikunate(token_length=3).split('-')[1:]) + ': '
+        if prefix_disable_random:
+            prefix += ': '
+
+        else:
+            haikunator = Haikunator()
+            prefix += '-' + '-'.join(haikunator.haikunate(token_length=3).split('-')[1:]) + ': '
 
     q = queue.Queue(maxsize=1024 * 1024)
 
@@ -96,7 +101,6 @@ def main(
 
     if bypass:
         print('Bypassing log send to server')
-        print('prefix', prefix)
 
     else:
         ws_url = f'{ws_url}/?token={token}'
