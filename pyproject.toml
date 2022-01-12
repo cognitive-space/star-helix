@@ -21,15 +21,21 @@ homepage = "https://github.com/cognitive-space/star-helix"
 [project.scripts]
 shelix = "shelix.main:run_cli"
 
+[project.optional-dependencies]
 [tool]
 [tool.pdm]
+version = {from = "shelix/__init__.py"}
 
 [tool.pdm.scripts]
 _.env_file = ".env"
-noisy = "./shelix_cli/main.py \"python3 noisy.py\""
+noisy = "./shelix/main.py \"python3 noisy.py\""
 publish = "pdm publish --username pizzapanther"
 
 
+[tool.pdm.dev-dependencies]
+dev = [
+    "twine>=3.7.1",
+]
 [build-system]
 requires = ["pdm-pep517"]
 build-backend = "pdm.pep517.api"
