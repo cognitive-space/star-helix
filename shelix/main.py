@@ -71,15 +71,17 @@ def main(
         bypass: bool = typer.Option(False, help="Bypass Reporting to the server", envvar="SHELIX_BYPASS"),
         prefix: str = typer.Option('', help="Prefix log output", envvar="SHELIX_PREFIX"),
         prefix_disable_random: bool = typer.Option(False, envvar="SHELIX_PREFIX_DISABLE_RANDOM"),
+        prefix_ts: bool = typer.Option(False, help="Prefix log output with Timestamp", envvar="SHELIX_TS_PREFIX"),
     ):
 
     if prefix:
         if prefix_disable_random:
-            prefix += ': '
+            prefix = f'{prefix}: '
 
         else:
             haikunator = Haikunator()
-            prefix += '-' + '-'.join(haikunator.haikunate(token_length=3).split('-')[1:]) + ': '
+            rando = '-'.join(haikunator.haikunate(token_length=3).split('-')[1:])
+            prefix = f'{prefix}[{rando}]: '
 
     q = queue.Queue(maxsize=1024 * 1024)
 
@@ -110,7 +112,13 @@ def main(
         while not q.empty():
             line = q.get()
             if line:
-                line = prefix + line.decode()
+                if prefix_ts:
+                    now = datetime.datetime.now(datetime.timezone.utc)
+                    line = prefix + f'{now.isoformat()}: ' + line.decode()
+
+                else:
+                    line = prefix + line.decode()
+
                 print(line, end='')
                 if not bypass:
                     content += line
