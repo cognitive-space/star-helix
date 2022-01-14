@@ -88,6 +88,13 @@ def main(
     env = copy.copy(os.environ)
     env['PYTHONUNBUFFERED'] = '1'
 
+    if bypass:
+        print('Bypassing log send to server')
+
+    else:
+        ws_url = f'{ws_url}/?token={token}'
+        ws = start_socket(ws_url, prefix, prefix_ts)
+
     process = subprocess.Popen(
         command,
         stdout=subprocess.PIPE,
@@ -100,13 +107,6 @@ def main(
     reader = asfr.AsynchronousFileReader(process.stdout, q)
     last_send = datetime.datetime.utcnow()
     content = ''
-
-    if bypass:
-        print('Bypassing log send to server')
-
-    else:
-        ws_url = f'{ws_url}/?token={token}'
-        ws = start_socket(ws_url)
 
     while not reader.eof():
         while not q.empty():

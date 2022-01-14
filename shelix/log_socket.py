@@ -1,3 +1,4 @@
+import datetime
 import os
 import threading
 
@@ -13,24 +14,45 @@ def on_message(ws, message):
 
 def on_error(ws, error):
     if SHOW_ERRORS:
-        print(error)
+        ws.printer(error)
 
 
 def on_close(ws, close_status_code, close_msg):
-    print("websocket closed")
+    ws.printer("websocket closed")
 
 
 def on_open(ws):
-    print("websocket open")
+    ws.printer("websocket open")
 
 
 def run_ws(ws):
     ws.run_forever()
 
 
-def start_socket(ws_url):
-    ws = websocket.WebSocketApp(
+class WSPrinter(websocket.WebSocketApp):
+    def __init__(self, ws_url, prefix, prefix_ts, *args, **kwargs):
+        self.prefix = prefix
+        self.prefix_ts = prefix_ts
+        super().__init__(ws_url, *args, **kwargs)
+
+    def printer(self, line):
+        line = str(line)
+
+        if self.prefix_ts:
+            now = datetime.datetime.now(datetime.timezone.utc)
+            line = self.prefix + f'{now.isoformat()}: ' + line
+
+        else:
+            line = self.prefix + line
+
+        print(line)
+
+
+def start_socket(ws_url, prefix='', prefix_ts=False):
+    ws = WSPrinter(
         ws_url,
+        prefix,
+        prefix_ts,
         on_open=on_open,
         on_message=on_message,
         on_error=on_error,
