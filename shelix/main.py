@@ -10,6 +10,7 @@ import subprocess
 import time
 import traceback
 
+from pathlib import Path
 
 from haikunator import Haikunator
 
@@ -72,9 +73,19 @@ def main(
         prefix: str = typer.Option('', help="Prefix log output", envvar="SHELIX_PREFIX"),
         prefix_disable_random: bool = typer.Option(False, envvar="SHELIX_PREFIX_DISABLE_RANDOM"),
         prefix_ts: bool = typer.Option(False, help="Prefix log output with Timestamp", envvar="SHELIX_TS_PREFIX"),
+        prefix_store: bool = typer.Option(False, help="Store and load prefix for next process", envvar="SHELIX_STORE_PREFIX"),
     ):
 
-    if prefix:
+    data_loaded = False
+    config_path = Path(os.environ['HOME']) / '.shelix.json'
+    if prefix_store:
+        if config_path.exists():
+            with config_path.open('r') as fh:
+                data = json.loads(fh.read())
+                prefix = data['prefix']
+                data_loaded = True
+
+    if prefix and not data_loaded:
         if prefix_disable_random:
             prefix = f'{prefix}: '
 
@@ -82,6 +93,10 @@ def main(
             haikunator = Haikunator()
             rando = '-'.join(haikunator.haikunate(token_length=3).split('-')[1:])
             prefix = f'{prefix}[{rando}]: '
+
+    if prefix_store:
+        with config_path.open('w') as fh:
+            fh.write(json.dumps({'prefix': prefix}))
 
     q = queue.Queue(maxsize=1024 * 1024)
 
